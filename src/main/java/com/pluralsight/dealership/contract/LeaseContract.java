@@ -5,14 +5,14 @@ import com.pluralsight.dealership.dealership.Vehicle;
 public class LeaseContract extends Contract{
     private double expectedEndingValue;
     private double leaseFee;
-    private double monthlypayment;
+    private double monthlyPaymentForLease;
 
     public LeaseContract(String date, String customerName, String customerEmail, Vehicle soldVehicle,
-                         double expectedEndingValue, double leaseFee, double monthlypayment) {
+                         double expectedEndingValue, double leaseFee, double monthlyPaymentForLease) {
         super(date, customerName, customerEmail, soldVehicle);
         this.expectedEndingValue = expectedEndingValue;
         this.leaseFee = leaseFee;
-        this.monthlypayment = monthlypayment;
+        this.monthlyPaymentForLease = monthlyPaymentForLease;
     }
 
     public double getExpectedEndingValue() {
@@ -31,12 +31,12 @@ public class LeaseContract extends Contract{
         this.leaseFee = leaseFee;
     }
 
-    public double getMonthlypayment() {
-        return monthlypayment;
+    public double getMonthlyPaymentForLease() {
+        return monthlyPaymentForLease;
     }
 
-    public void setMonthlypayment(double monthlypayment) {
-        this.monthlypayment = monthlypayment;
+    public void setMonthlyPaymentForLease(double monthlyPaymentForLease) {
+        this.monthlyPaymentForLease = monthlyPaymentForLease;
     }
 
     @Override

@@ -61,6 +61,10 @@ public class UserInterface {
                 case "9":
                     processRemoveVehicleRequest();
                     break;
+                case "11":
+                    processSalesContract();
+                    break;
+
                 case "99":
                     quit = true;
                     break;
@@ -223,8 +227,21 @@ public class UserInterface {
         int processingFee = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.println("do you want to finance the vehicle");
-        boolean isFinanced = scanner.nextBoolean();
+        System.out.println("do you want to finance the vehicle(Y/N)");
+        boolean isFinanced = false;
+
+        while (scanner.nextLine().isEmpty()){
+            if (scanner.nextLine().equalsIgnoreCase("y")){
+                isFinanced = true;
+                break;
+            } else if (scanner.nextLine().equalsIgnoreCase("n")) {
+                break;
+            }else {
+                System.out.println("enter yes or no");
+            }
+        }
+
+
 
         SalesContract sales = new SalesContract(date, customerName, customerEmail, vehicleMatch,salesTax,recordingFee,processingFee,isFinanced);
 

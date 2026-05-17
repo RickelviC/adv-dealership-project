@@ -1,5 +1,6 @@
 package com.pluralsight.dealership.dealership;
 
+import com.pluralsight.dealership.contract.Contract;
 import com.pluralsight.dealership.contract.SalesContract;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Scanner;
 public class UserInterface {
 
     private Dealership dealership;
+    private Contract contract;
     private Scanner scanner;
 
     public UserInterface() {
@@ -203,11 +205,11 @@ public class UserInterface {
         int vin = scanner.nextInt();
 
         Vehicle vehicleMatch = null;
-        boolean vehicleFound = true;
+        boolean vehicleFound = false;
         for (Vehicle vehicle : dealership.getAllVehicles()) {
             if (vehicle.getVin() == vin) {
                 vehicleMatch = vehicle;
-                vehicleFound = false;
+                vehicleFound = true;
                 break;
             }
         }
@@ -241,16 +243,16 @@ public class UserInterface {
             }
         }
 
-
-
         SalesContract sales = new SalesContract(date, customerName, customerEmail, vehicleMatch,salesTax,recordingFee,processingFee,isFinanced);
 
-
+        //dealership.removeVehicle(vehicleMatch);
     }
 
     private void init() {
         DealershipFileManager manager = new DealershipFileManager();
         dealership = manager.getDealership();
+        contract = manager.getContract();
+
     }
 
     private void displayVehicles(List<Vehicle> vehicles) {

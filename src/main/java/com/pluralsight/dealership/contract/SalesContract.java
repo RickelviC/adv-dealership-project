@@ -4,12 +4,12 @@ import com.pluralsight.dealership.dealership.Vehicle;
 
 public class SalesContract extends Contract{
     private double salesTax;
-    private int recodingFee;
-    private int processingFee;
+    private double recodingFee;
+    private double processingFee;
     private boolean isFinanced;
 
     public SalesContract(String date, String customerName, String customerEmail, Vehicle soldVehicle, double salesTax,
-                         int recodingFee, int processingFee, boolean isFinanced) {
+                         double recodingFee, double processingFee, boolean isFinanced) {
         super(date, customerName, customerEmail, soldVehicle);
         this.salesTax = salesTax;
         this.recodingFee = recodingFee;
@@ -25,7 +25,7 @@ public class SalesContract extends Contract{
         this.salesTax = salesTax;
     }
 
-    public int getRecodingFee() {
+    public double getRecodingFee() {
         return recodingFee;
     }
 
@@ -33,7 +33,7 @@ public class SalesContract extends Contract{
         this.recodingFee = recodingFee;
     }
 
-    public int getProcessingFee() {
+    public double getProcessingFee() {
         return processingFee;
     }
 

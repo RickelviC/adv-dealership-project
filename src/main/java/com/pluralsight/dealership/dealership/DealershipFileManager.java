@@ -95,8 +95,8 @@ public class DealershipFileManager {
                     int odometer = Integer.parseInt(fields[10]);
                     double price = Double.parseDouble(fields[11]);
                     double salesTax = Double.parseDouble(fields[12]);
-                    int recordingFee = Integer.parseInt(fields[13]);
-                    int processingFee = Integer.parseInt(fields[14]);
+                    double recordingFee = Double.parseDouble(fields[13]);
+                    double processingFee = Double.parseDouble(fields[14]);
                     double totalCost = Double.parseDouble(fields[15]);
                     boolean finance = fields[16].equalsIgnoreCase("YES");
                     double monthlyPayment = Double.parseDouble(fields[17]);
@@ -127,11 +127,10 @@ public class DealershipFileManager {
 
                     lease = new LeaseContract(contractDate, customerName, customerEmail, vehicle, endingValue, leaseFee, monthlyPayment);
                     return lease;
-
                 }
             }
-        } catch (Exception ex) {
-            System.err.println("something went wrong");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return null;
     }

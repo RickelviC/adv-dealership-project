@@ -1,7 +1,12 @@
 package com.pluralsight.dealership.dealership;
 
+import com.pluralsight.dealership.contract.Contract;
+import com.pluralsight.dealership.contract.LeaseContract;
+import com.pluralsight.dealership.contract.SalesContract;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DealershipFileManager {
 
@@ -64,6 +69,71 @@ public class DealershipFileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Contract getContract() {
+        SalesContract sales = null;
+        LeaseContract lease = null;
+
+        try (BufferedReader br = new BufferedReader(new FileReader("Contracts.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+
+                String[] fields = line.split("\\|");
+                String first = fields[0];
+
+                if (first.equalsIgnoreCase("sale")) {
+                    String contractDate = fields[1];
+                    String customerName = fields[2];
+                    String customerEmail = fields[3];
+                    int carID = Integer.parseInt(fields[4]);
+                    int year = Integer.parseInt(fields[5]);
+                    String make = fields[6];
+                    String model = fields[7];
+                    String vehicleType = fields[8];
+                    String color = fields[9];
+                    int odometer = Integer.parseInt(fields[10]);
+                    double price = Double.parseDouble(fields[11]);
+                    double salesTax = Double.parseDouble(fields[12]);
+                    int recordingFee = Integer.parseInt(fields[13]);
+                    int processingFee = Integer.parseInt(fields[14]);
+                    double totalCost = Double.parseDouble(fields[15]);
+                    boolean finance = fields[16].equalsIgnoreCase("YES");
+                    double monthlyPayment = Double.parseDouble(fields[17]);
+
+                    Vehicle vehicle = new Vehicle(carID, year, make, model, vehicleType, color, odometer, price);
+
+                    sales = new SalesContract(contractDate, customerName, customerEmail, vehicle, salesTax, recordingFee, processingFee, finance);
+                    return sales;
+
+                } else if (first.equalsIgnoreCase("lease")) {
+                    String contractDate = fields[1];
+                    String customerName = fields[2];
+                    String customerEmail = fields[3];
+                    int carID = Integer.parseInt(fields[4]);
+                    int year = Integer.parseInt(fields[5]);
+                    String make = fields[6];
+                    String model = fields[7];
+                    String vehicleType = fields[8];
+                    String color = fields[9];
+                    int odometer = Integer.parseInt(fields[10]);
+                    double price = Double.parseDouble(fields[11]);
+                    double endingValue = Double.parseDouble(fields[12]);
+                    double leaseFee = Double.parseDouble(fields[13]);
+                    double totalCost = Double.parseDouble(fields[14]);
+                    double monthlyPayment = Double.parseDouble(fields[15]);
+
+                    Vehicle vehicle = new Vehicle(carID, year, make, model, vehicleType, color, odometer, price);
+
+                    lease = new LeaseContract(contractDate, customerName, customerEmail, vehicle, endingValue, leaseFee, monthlyPayment);
+                    return lease;
+
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println("something went wrong");
+        }
+        return null;
     }
 
 }

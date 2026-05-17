@@ -1,5 +1,7 @@
 package com.pluralsight.dealership.dealership;
 
+import com.pluralsight.dealership.contract.SalesContract;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -181,6 +183,47 @@ public class UserInterface {
 
         DealershipFileManager manager = new DealershipFileManager();
         manager.saveDealership(dealership);
+    }
+
+    public void processSalesContract() {
+        System.out.println("enter date of sell");
+        String date = scanner.nextLine();
+
+        System.out.println("enter your name");
+        String customerName = scanner.nextLine();
+
+        System.out.println("enter your email");
+        String customerEmail = scanner.nextLine();
+
+        System.out.print("Enter the VIN of the vehicle: ");
+        int vin = scanner.nextInt();
+
+        Vehicle vehicleMatch = null;
+        boolean vehicleFound = true;
+        for (Vehicle vehicle : dealership.getAllVehicles()) {
+            if (vehicle.getVin() == vin) {
+                vehicleMatch = vehicle;
+                vehicleFound = false;
+                break;
+            }
+        }
+        if (!vehicleFound) {
+            System.out.println("Vehicle not found. Please try again.");
+            return;
+        }
+        scanner.nextLine();
+
+        System.out.println("do you want to finance the vehicle");
+        boolean isFinanced = scanner.nextBoolean();
+
+
+        //SalesContract sales = new SalesContract(date, customerName, customerEmail, vehicleMatch, isFinanced);
+
+        dealership.removeVehicle(vehicleMatch);
+
+        DealershipFileManager manager = new DealershipFileManager();
+        manager.saveDealership(dealership);
+
     }
 
     private void init() {

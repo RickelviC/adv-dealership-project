@@ -50,7 +50,7 @@ public class SalesContract extends Contract{
     }
     @Override
     public double getTotalPrice() {
-        return getSoldVehicle().getPrice() + getSalesTax() + getRecodingFee() + processingFee;
+        return getSoldVehicle().getPrice() + getSalesTax() + getRecodingFee() + getProcessingFee();
     }
 
     @Override

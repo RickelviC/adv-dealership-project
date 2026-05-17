@@ -213,16 +213,21 @@ public class UserInterface {
         }
         scanner.nextLine();
 
+        System.out.println("double");
+        double salesTax = scanner.nextDouble();
+
+        System.out.println("recording fee");
+        int recordingFee = scanner.nextInt();
+
+        System.out.println("processing fee");
+        int processingFee = scanner.nextInt();
+        scanner.nextLine();
+
         System.out.println("do you want to finance the vehicle");
         boolean isFinanced = scanner.nextBoolean();
 
+        SalesContract sales = new SalesContract(date, customerName, customerEmail, vehicleMatch,salesTax,recordingFee,processingFee,isFinanced);
 
-        //SalesContract sales = new SalesContract(date, customerName, customerEmail, vehicleMatch, isFinanced);
-
-        dealership.removeVehicle(vehicleMatch);
-
-        DealershipFileManager manager = new DealershipFileManager();
-        manager.saveDealership(dealership);
 
     }
 

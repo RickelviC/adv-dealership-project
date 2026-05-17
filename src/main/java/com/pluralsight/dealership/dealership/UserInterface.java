@@ -28,9 +28,9 @@ public class UserInterface {
             System.out.println("5. Get vehicles by mileage");
             System.out.println("6. Get vehicles by type");
             System.out.println("7. Get all vehicles");
-            System.out.println("8. Add vehicle");
-            System.out.println("9. Remove vehicle");
-            System.out.println("99. Quit");
+            System.out.println("8. contract menu");
+            System.out.println("9. Quit");
+
 
             System.out.print("Enter your choice: ");
             String choice = scanner.nextLine();
@@ -58,16 +58,9 @@ public class UserInterface {
                     processGetAllVehiclesRequest();
                     break;
                 case "8":
-                    processAddVehicleRequest();
+                    contractMenu();
                     break;
                 case "9":
-                    processRemoveVehicleRequest();
-                    break;
-                case "11":
-                    processSalesContract();
-                    break;
-
-                case "99":
                     quit = true;
                     break;
                 default:
@@ -232,18 +225,18 @@ public class UserInterface {
         System.out.println("do you want to finance the vehicle(Y/N)");
         boolean isFinanced = false;
 
-        while (scanner.nextLine().isEmpty()){
-            if (scanner.nextLine().equalsIgnoreCase("y")){
+        while (scanner.nextLine().isEmpty()) {
+            if (scanner.nextLine().equalsIgnoreCase("y")) {
                 isFinanced = true;
                 break;
             } else if (scanner.nextLine().equalsIgnoreCase("n")) {
                 break;
-            }else {
+            } else {
                 System.out.println("enter yes or no");
             }
         }
 
-        SalesContract sales = new SalesContract(date, customerName, customerEmail, vehicleMatch,salesTax,recordingFee,processingFee,isFinanced);
+        SalesContract sales = new SalesContract(date, customerName, customerEmail, vehicleMatch, salesTax, recordingFee, processingFee, isFinanced);
 
         //dealership.removeVehicle(vehicleMatch);
     }
@@ -258,6 +251,39 @@ public class UserInterface {
     private void displayVehicles(List<Vehicle> vehicles) {
         for (Vehicle vehicle : vehicles) {
             System.out.println(vehicle.toString());
+        }
+    }
+
+    private void contractMenu(){
+        boolean end = false;
+        while (!end) {
+            System.out.println("---------- Contract Menu ----------");
+            System.out.println("1. Add vehicle");
+            System.out.println("2. Remove vehicle");
+            System.out.println("3. sale a vehicles");
+            System.out.println("4. lease a vehicles");
+            System.out.println("5. quit");
+
+            System.out.print("Enter your choice: ");
+            String input = scanner.nextLine();
+
+            switch (input) {
+                case "1":
+                    processAddVehicleRequest();;
+                    break;
+                case "2":
+                    processRemoveVehicleRequest();
+                    break;
+                case "3":
+                    processSalesContract();
+                    break;
+                case "4":
+                    //processLeaseContract();
+                    break;
+                case "5":
+                    end = true;
+                    break;
+            }
         }
     }
 
